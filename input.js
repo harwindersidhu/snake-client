@@ -1,5 +1,7 @@
 // Stores the active TCP connection object.
 let connection;
+let sendMessage = false;
+  let message = "Say: ";
 
 // setup interface to handle user input from stdin
 const setupInput = (conn) => {
@@ -23,9 +25,23 @@ const handleUserInput = function(key) {
     connection.write('Move: down');
   } else if(key === 'd' || key === 'D') {
     connection.write('Move: right');
-  } else {
-    //Do nothing;
-  } 
+  } else if(key === '1'){
+    //If we press 1, that means we will send message
+    sendMessage = true;
+    key = "";
+  } else if(key === '0') {
+    //If we pressed 0 it will mean that message ends
+    if (sendMessage) {
+      console.log("Send message");
+      connection.write(message);
+      message = "Say: ";
+    }
+    sendMessage = false;
+  }
+  if (sendMessage) {
+    message += key;
+    console.log(message);
+  }
 };
 
 module.exports = {

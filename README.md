@@ -7,7 +7,7 @@ This is simply a multiplayer take on the genre.
 Before you can run this client, you will need to be running the server side which you can download and install from [here](https://github.com/lighthouse-labs/snek-multiplayer). 
 
 ## Final Product
-- After a connection is established between client and server, we will add an event handler to the client that logs 'Successfully connected to game server' when a connection is established.
+- After a connection is established between client and server, we will see a message 'Successfully connected to game server' on a terminal.
   - !["Connected"](./images/Connected.png)
 
 - Upon successful connection, this is how our snake will look on server-side.

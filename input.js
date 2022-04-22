@@ -19,29 +19,35 @@ const setupInput = (conn) => {
 const handleUserInput = function(key) {
   if (key === '\u0003') {
     process.exit();
-  } else if(key === 'w' || key === 'W') {
+  } else if (!sendMessage && (key === 'w' || key === 'W')) {
     connection.write(MOVE_UP_KEY);
-  } else if(key === 'a' || key === 'A') {
+  } else if (!sendMessage && (key === 'a' || key === 'A')) {
     connection.write(MOVE_LEFT_KEY);
-  } else if(key === 's' || key === 'S') {
+  } else if (!sendMessage && (key === 's' || key === 'S')) {
     connection.write(MOVE_DOWN_KEY);
-  } else if(key === 'd' || key === 'D') {
+  } else if (!sendMessage && (key === 'd' || key === 'D')) {
     connection.write(MOVE_RIGHT_KEY);
-  } else if(key === '1'){
-    //If we press 1, that means we will send message
+  } else if (key === '1') {
+    //If we press 1, that means we will send message.
     sendMessage = true;
     key = "";
-  } else if(key === '0') {
-    //If we pressed 0 it will mean that message ends
-    if (sendMessage) {
-      connection.write(message);
-      message = "Say: ";
-    }
-    sendMessage = false;
+  } else if (key === '0') {
+    //If we pressed 0 it will mean that message ends. 
+    messageEnds();
   }
+  //If sendMessage is true, then any key we hit on keyboard will be part of message.
   if (sendMessage) {
     message += key;
   }
+};
+
+//We will send the message string and will make sendMessage to false.
+const messageEnds = () => {
+  if (sendMessage) {
+    connection.write(message);
+    message = "Say: ";
+  }
+  sendMessage = false;
 };
 
 module.exports = {

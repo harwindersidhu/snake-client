@@ -32,7 +32,7 @@ const handleUserInput = function(key) {
     sendMessage = true;
     key = "";
   } else if (key === '0') {
-    //If we pressed 0 it will mean that message ends. 
+    //If we pressed 0 it will mean that message ends.
     messageEnds();
   }
   //If sendMessage is true, then any key we hit on keyboard will be part of message.
